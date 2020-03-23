@@ -1,28 +1,59 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <h1>Vuex</h1>
+    <app-result></app-result>
+    <app-counter></app-counter>
+    <app-another-result></app-another-result>
+    <app-another-counter></app-another-counter>
+    <hr>
+    <input type="text" v-model="value">
+    <p>{{ value }}</p>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Result from './components/Result'
+import Counter from './components/Counter'
+import AnotherResult from './components/AnotherResult'
+import AnotherCounter from './components/AnotherCounter'
 
 export default {
-  name: 'App',
+  computed: {
+    value: {
+      get() {
+        return this.$store.getters.value
+      },
+      set(value) {
+        this.$store.dispatch('updateValue', value)
+      }
+    }
+  },
+  methods: {
+    updateValue(event) {
+      this.$store.dispatch('updateValue', event.target.value)
+    }
+  },
   components: {
-    HelloWorld
+    appResult: Result,
+    appCounter: Counter,
+    appAnotherResult: AnotherResult,
+    appAnotherCounter: AnotherCounter
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
+  hr {
+    width: calc(100vw -5rem);
+    color: #aaaaa;
+  }
+
+  input {
+    width: 10rem;
+    padding: .5rem;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid #000;
+    font-size: 1rem;
+  }
 </style>
