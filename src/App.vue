@@ -44,8 +44,8 @@ export default {
 
 <style>
   hr {
-    width: calc(100vw -5rem);
-    color: #aaaaa;
+    width: calc(100vw - 5rem);
+    color: #aaaaaa;
   }
 
   input {
